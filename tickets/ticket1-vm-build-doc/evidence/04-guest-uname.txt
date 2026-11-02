@@ -1,0 +1,22 @@
+student@ubuntu-server:~$ uname -a
+Linux ubuntu-server 6.8.0-40-generic #40-Ubuntu SMP PREEMPT_DYNAMIC Fri Jul  5 10:34:03 UTC 2024 x86_64 x86_64 x86_64 GNU/Linux
+
+student@ubuntu-server:~$ lsb_release -a
+No LSB modules are available.
+Distributor ID:	Ubuntu
+Description:	Ubuntu 24.04.1 LTS
+Release:	24.04
+Codename:	noble
+
+student@ubuntu-server:~$ uptime
+ 17:15:22 up 1:42,  1 user,  load average: 0.02, 0.04, 0.00
+
+student@ubuntu-server:~$ lscpu | grep "Model name\|CPU(s):\|Thread(s) per core:"
+CPU(s):                          2
+Thread(s) per core:              1
+Model name:                      12th Gen Intel(R) Core(TM) i7-12700H
+
+student@ubuntu-server:~$ free -m
+               total        used        free      shared  buff/cache   available
+Mem:            1972         382        1290           2         300        1450
+Swap:           2048           0        2048

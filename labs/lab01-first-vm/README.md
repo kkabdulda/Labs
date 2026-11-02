@@ -1,4 +1,4 @@
-# Lab 1: Your First Virtual Machine
+# Lab 1: First Virtual Machine
 
 **Course:** Operating Systems & Architecture  
 **Week:** 2  

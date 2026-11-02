@@ -1,0 +1,39 @@
+======================================================================
+HOST HARDWARE AND OPERATING SYSTEM AUDIT
+======================================================================
+Report Generated : Monday, November 2, 2026
+Computer Name    : YERSULTAN
+Domain / Workgroup: WORKGROUP
+
+--- Operating System ---
+OS Name          : Microsoft Windows 11 Home
+Version          : 10.0.22631 Build 22631 (23H2 / 2009)
+OS Architecture  : 64-bit Operating System, x64-based processor
+Windows Directory: C:\Windows
+
+--- Central Processing Unit (CPU) ---
+Processor Name   : 12th Gen Intel(R) Core(TM) i7-12700H
+Base Frequency   : 2.30 GHz (Turbo boost up to 4.70 GHz)
+Physical Cores   : 14 Cores (6 Performance-cores + 8 Efficient-cores)
+Logical Threads  : 20 Logical Processors
+Virtualization   : Hardware VT-x / SLAT Enabled in UEFI Firmware
+Hyper-V Support  : Second Level Address Translation (SLAT), VM Monitor Mode Extensions
+
+--- Physical Memory (RAM) ---
+Total Physical   : 16,384 MB (16.0 GB DDR5-4800 MT/s)
+Memory Modules   : Slot 1: 8 GB Samsung DDR5-4800 SODIMM
+                   Slot 2: 8 GB Micron Technology DDR5-4800 SODIMM
+Channel Mode     : Dual Channel Active
+Host Idle Usage  : ~5,800 MB (35% in use by Windows 11 kernel, DWM, background services)
+Free / Available : ~10,400 MB available for virtualization workloads
+
+--- Storage Subsystem ---
+System Drive (C:): NVMe PCIe 4.0 x4 Solid-State Drive (SSD)
+Total Capacity   : 512 GB (476.9 GB formatted NTFS)
+Used Space       : 412.9 GB
+Free Space       : 64.0 GB free unallocated disk space
+
+--- Hypervisor Platform ---
+Software         : Oracle VM VirtualBox Version 7.0.x r161095 (Qt5.15.2)
+Extension Pack   : Oracle VM VirtualBox Extension Pack 7.0 (Installed)
+Virtual Networks : NatNetwork (CIDR: 10.0.2.0/24, DHCP Enabled, IPv6 Disabled)
