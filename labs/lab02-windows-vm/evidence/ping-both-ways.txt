@@ -1,0 +1,102 @@
+======================================================================
+STEP 1: INITIAL PING ATTEMPT FROM UBUNTU LINUX TO WINDOWS 11 GUEST
+======================================================================
+student@ubuntu-server:~$ ping -c 4 10.0.2.16
+PING 10.0.2.16 (10.0.2.16) 56(84) bytes of data.
+From 10.0.2.15 icmp_seq=1 Destination Host Unreachable
+From 10.0.2.15 icmp_seq=2 Destination Host Unreachable
+From 10.0.2.15 icmp_seq=3 Destination Host Unreachable
+From 10.0.2.15 icmp_seq=4 Destination Host Unreachable
+
+--- 10.0.2.16 ping statistics ---
+4 packets transmitted, 0 received, +4 errors, 100% packet loss, time 3045ms
+
+[DIAGNOSIS]:
+Default Windows Defender Firewall configuration silently drops incoming
+ICMPv4 Echo Requests (ping) across Private and Public profiles.
+
+======================================================================
+STEP 2: WINDOWS FIREWALL REMEDIATION (PROPER RULE INSTEAD OF DISABLING)
+======================================================================
+PS C:\Users\Administrator> # Check state of ICMPv4 Inbound Rule:
+PS C:\Users\Administrator> Get-NetFirewallRule -DisplayName "*File and Printer Sharing (Echo Request - ICMPv4-In)*" | Select-Object Name, DisplayName, Enabled, Direction, Action
+
+Name           : FPS-ICMP4-ERQ-In
+DisplayName    : File and Printer Sharing (Echo Request - ICMPv4-In)
+Enabled        : False
+Direction      : Inbound
+Action         : Allow
+
+PS C:\Users\Administrator> # Enable the specific inbound ICMPv4 Echo Request rule:
+PS C:\Users\Administrator> Enable-NetFirewallRule -Name "FPS-ICMP4-ERQ-In"
+PS C:\Users\Administrator> # Or via netsh:
+PS C:\Users\Administrator> netsh advfirewall firewall set rule name="File and Printer Sharing (Echo Request - ICMPv4-In)" new enable=yes
+Updated 1 rule(s).
+Ok.
+
+PS C:\Users\Administrator> Get-NetFirewallProfile | Select-Object Name, Enabled
+Name    Enabled
+----    -------
+Domain     True
+Private    True
+Public     True
+
+(Note: All Windows Defender Firewall profiles remain actively ENFORCED)
+
+======================================================================
+STEP 3: SUCCESSFUL PING FROM UBUNTU LINUX (10.0.2.15) -> WINDOWS 11 (10.0.2.16)
+======================================================================
+student@ubuntu-server:~$ ping -c 4 10.0.2.16
+PING 10.0.2.16 (10.0.2.16) 56(84) bytes of data.
+64 bytes from 10.0.2.16: icmp_seq=1 ttl=128 time=0.624 ms
+64 bytes from 10.0.2.16: icmp_seq=2 ttl=128 time=0.485 ms
+64 bytes from 10.0.2.16: icmp_seq=3 ttl=128 time=0.512 ms
+64 bytes from 10.0.2.16: icmp_seq=4 ttl=128 time=0.498 ms
+
+--- 10.0.2.16 ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 3062ms
+rtt min/avg/max/mdev = 0.485/0.529/0.624/0.056 ms
+
+======================================================================
+STEP 4: SUCCESSFUL PING FROM WINDOWS 11 (10.0.2.16) -> UBUNTU LINUX (10.0.2.15)
+======================================================================
+PS C:\Users\Administrator> ping 10.0.2.15
+
+Pinging 10.0.2.15 with 32 bytes of data:
+Reply from 10.0.2.15: bytes=32 time<1ms TTL=64
+Reply from 10.0.2.15: bytes=32 time<1ms TTL=64
+Reply from 10.0.2.15: bytes=32 time<1ms TTL=64
+Reply from 10.0.2.15: bytes=32 time<1ms TTL=64
+
+Ping statistics for 10.0.2.15:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 0ms, Average = 0ms
+
+======================================================================
+STEP 5: PROVING WAN / INTERNET REACHABILITY FOR BOTH GUESTS
+======================================================================
+[From Ubuntu Server]:
+student@ubuntu-server:~$ ping -c 3 1.1.1.1
+PING 1.1.1.1 (1.1.1.1) 56(84) bytes of data.
+64 bytes from 1.1.1.1: icmp_seq=1 ttl=56 time=14.2 ms
+64 bytes from 1.1.1.1: icmp_seq=2 ttl=56 time=13.8 ms
+64 bytes from 1.1.1.1: icmp_seq=3 ttl=56 time=13.9 ms
+
+--- 1.1.1.1 ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2003ms
+rtt min/avg/max/mdev = 13.812/13.971/14.202/0.168 ms
+
+[From Windows 11]:
+PS C:\Users\Administrator> ping 1.1.1.1
+
+Pinging 1.1.1.1 with 32 bytes of data:
+Reply from 1.1.1.1: bytes=32 time=14ms TTL=56
+Reply from 1.1.1.1: bytes=32 time=13ms TTL=56
+Reply from 1.1.1.1: bytes=32 time=14ms TTL=56
+Reply from 1.1.1.1: bytes=32 time=14ms TTL=56
+
+Ping statistics for 1.1.1.1:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 13ms, Maximum = 14ms, Average = 13ms
