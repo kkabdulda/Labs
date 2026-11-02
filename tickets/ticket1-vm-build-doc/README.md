@@ -6,23 +6,16 @@
 
 ## 1. What Was Asked
 
-On Thursday afternoon, our internal IT helpdesk received the following ticket from Aigerim T., Office Manager at the Almaty office:
+### 1.1 The Request, as Received
 
 ```text
-Ticket ID:  #IT-10492
-From:       Aigerim T. (Office Manager)
-Date:       Thu, Oct 29, 2026 14:15
-Subject:    New developer starts Monday, needs a test machine
+From: Aigerim T. (Office Manager)
+Subject: test machine for new dev
 
-Hi IT support,
-
-We have a new backend developer starting next Monday! Can you set up a test 
-computer for them? They will need to test their code before pushing to production. 
-
-Nothing special, just a standard computer with internet.
-
-Thanks,
-Aigerim T. (Office Manager)
+Hi, we have someone starting on Monday and he needs a test computer
+set up. Nothing special, just so he can try things without breaking
+anything. Can you write down how to do it so I can do the next one
+myself? Thanks
 ```
 
 ### Contextual Analysis of the Request
