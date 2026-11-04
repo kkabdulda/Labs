@@ -1,0 +1,15 @@
+﻿=== CPU ===
+Name                                 NumberOfCores MaxClockSpeed
+----                                 ------------- -------------
+12th Gen Intel(R) Core(TM) i7-12700H            14          2300
+
+=== MEMORY ===
+Capacity Speed Manufacturer     
+  -------- ----- ------------     
+8589934592  4800 Samsung          
+8589934592  4800 Micron Technology
+
+=== DISK ===
+Model                             Size InterfaceType
+-----                             ---- -------------
+Micron_2450_MTFDKBA512TFK 512105932800 SCSI
